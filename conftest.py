@@ -22,22 +22,23 @@ def login(driver):
 def driver():
     if saucelabs_remote == "True":
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
-        desired_cap = {
+        desktop_browsers = {
+            "platform": "OS X 10.14",
+            "browserName": "chrome",
+            "version": "latest",
+            "sauce:options": {
+                "extendedDebugging": True
 
-            'os': 'OS X',
-            'os_version': 'Catalina',
-            'browser': 'Chrome',
-            'browser_version': '81',
-            'name': "First Test"
-
+            }
         }
-        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
+        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desktop_browsers)
     else:
         driver = webdriver.Chrome()
     yield driver
-    driver.quit()
+    driver.quit() \
+ \
+    @ pytest.fixture
 
 
-@pytest.fixture
 def dashboard(login):
     return login.login()
