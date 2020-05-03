@@ -32,5 +32,12 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      env:
+        TENANT: ${{secrets.TENANT}} 
+        USER_NAME: ${{secrets.USER_NAME}} 
+        PASSWORD: ${{secrets.PASSWORD}}
+        REMOTE: ${{secrets.REMOTE}}
+        SAUCELABS_USER_NAME: ${{secrets.SAUCELABS_USER_NAME}}
+        SAUCELABS_PASSWORD: ${{secrets.SAUCELABS_PASSWORD}}      
       run: |
         pytest
