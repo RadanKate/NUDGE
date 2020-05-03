@@ -28,17 +28,15 @@ def driver():
             "version": "latest",
             "sauce:options": {
                 "extendedDebugging": True
-
             }
         }
         driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desktop_browsers)
     else:
         driver = webdriver.Chrome()
     yield driver
-    driver.quit() \
- \
-    @ pytest.fixture
+    driver.quit()
 
 
+@pytest.fixture
 def dashboard(login):
     return login.login()
