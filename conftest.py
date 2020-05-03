@@ -1,10 +1,8 @@
 import pytest
 from Pages.Login_page import LoginPage
-# from Pages.Dashboard_page import DashboardPage
 from envparse import env
 from selenium import webdriver
 
-# login once before all the tests, using credentials from .env file
 env.read_envfile()
 tenant = env("TENANT")
 username = env("USER_NAME")
@@ -14,6 +12,7 @@ saucelabs_username = env("SAUCELABS_USER_NAME")
 saucelabs_password = env("SAUCELABS_PASSWORD")
 
 
+# login once before all the tests, using credentials from .env file
 @pytest.fixture
 def login(driver):
     return LoginPage(driver, tenant, username, password)
@@ -38,6 +37,7 @@ def driver():
     yield driver
     driver.quit()
 
-# @pytest.fixture
-# def dashboard(driver):
-#     return DashboardPage(driver)
+
+@pytest.fixture
+def dashboard(login):
+    return login.login()

@@ -4,8 +4,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-
 from Base_page import BasePage
+from Pages.Dashboard_page import DashboardPage
 
 
 class LoginPage(BasePage):
@@ -26,11 +26,11 @@ class LoginPage(BasePage):
         time.sleep(1)
         self.driver.find_element_by_css_selector("[type='submit']").click()
         time.sleep(1)
+        return DashboardPage(self.driver, self.tenant)
 
     def is_login_error_displayed(self) -> bool:
         try:
-            popup_error: WebElement = WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".modal-dialog")))
+            popup_error: WebElement = self.is_element_displayed(".modal-dialog")
             if not popup_error.is_displayed():
                 return False
             if not self.driver.find_element_by_css_selector(".modal-title").text == "Error":
