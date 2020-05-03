@@ -1,1 +1,12 @@
 # NUDGE
+
+
+Variables in the `.env` file:
+```
+TENANT=
+USER_NAME=
+PASSWORD=
+REMOTE=False
+SAUCELABS_USER_NAME=
+SAUCELABS_PASSWORD=
+ ```
