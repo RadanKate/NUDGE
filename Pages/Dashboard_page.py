@@ -10,4 +10,4 @@ class DashboardPage(BasePage):
                self.is_element_displayed("[data-test='tab-client-intake']") and \
                self.is_element_displayed("[data-test='tab-data-exploration']") and \
                self.is_element_displayed("[data-test='tab-telehealth-dashboard']") and \
-               self.is_element_displayed("[data-test=tab-tasks']")
+               self.is_element_displayed("[data-test='tab-tasks']")
