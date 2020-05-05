@@ -29,7 +29,7 @@ def driver():
             "name": "NUDGE",
             "deviceOrientation": "portrait",
             "platformVersion": "13.2",
-            "platfromName": "iOS",
+            "platformName": "iOS",
             "sauce:options": {
                 "extendedDebugging": True
             }
