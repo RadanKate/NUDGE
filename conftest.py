@@ -22,7 +22,7 @@ def login(driver):
 def driver():
     if saucelabs_remote == "True":
         desired_cap = {
-            "deviceName": "iPhone XR",
+            "deviceName": "iPhone XR free",
             "browserName": "Safari",
             "deviceOrientation": "portrait",
             "platformVersion": "13.3.1",
