@@ -14,12 +14,18 @@ class BasePage:
     def navigate_to(self, url: str):
         self.driver.get(self.tenant + url)
 
-    def is_element_displayed(self, css_locator, timeout=3):
+    def is_element_displayed(self, css_locator, timeout=3) -> bool:
         try:
             element: WebElement = WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, css_locator)))
             if not element.is_displayed():
                 return False
-            return element
+            return True
         except:
             return False
+
+    def get_element(self, css_locator, timeout=3) -> WebElement:
+        if self.is_element_displayed(css_locator, timeout):
+            return self.driver.find_element_by_css_selector(css_locator)
+        else:
+            raise Exception("Failed to find element " + css_locator)

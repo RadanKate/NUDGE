@@ -30,7 +30,7 @@ class LoginPage(BasePage):
 
     def is_login_error_displayed(self) -> bool:
         try:
-            popup_error: WebElement = self.is_element_displayed(".modal-dialog")
+            popup_error: WebElement = self.get_element(".modal-dialog")
             if not popup_error.is_displayed():
                 return False
             if not self.driver.find_element_by_css_selector(".modal-title").text == "Error":

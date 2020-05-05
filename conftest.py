@@ -21,22 +21,30 @@ def login(driver):
 @pytest.fixture
 def driver():
     if saucelabs_remote == "True":
+        desired_cap = {
+            "deviceName": "iPhone X Simulator",
+            "browserName": "Safari",
+            "deviceOrientation": "portrait",
+            "platformVersion": "12.2",
+            "platformName": "iOS"
+        }
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
+        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
+    else:
         desired_cap = {
             "browserName": "Chrome",
             "version": "*",
             "goog:chromeOptions": {
                 "mobileEmulation": {
-                    "deviceName": "iPhone 11 Simulator",
-                    "deviceOrientation": "portrait",
-                    "platformVersion": "13.2",
-                    "platformName": "iOS"
-                }
+                    "deviceMetrics": {
+                        "width": 360,
+                        "height": 640,
+                        "pixelRatio": 3
+                    },
+                    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4_1 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Chrome/80.0.3987.149 Mobile/14E5239e Safari/602.1"}
             }
         }
-        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
-    else:
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(desired_capabilities=desired_cap)
     yield driver
     driver.quit()
 
