@@ -25,7 +25,7 @@ def driver():
         desired_cap = {
             "browserName": "Chrome",
             "version": "*",
-            "goog:chromeoptions": {
+            "goog:chromeOptions": {
                 "mobileEmulation": {
                     "deviceName": "iPhone 11 Simulator",
                     "deviceOrientation": "portrait",
