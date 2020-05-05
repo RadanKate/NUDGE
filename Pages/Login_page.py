@@ -26,7 +26,9 @@ class LoginPage(BasePage):
         time.sleep(1)
         self.driver.find_element_by_css_selector("[type='submit']").click()
         time.sleep(1)
-        return DashboardPage(self.driver, self.tenant)
+        dashboard_page = DashboardPage(self.driver, self.tenant)
+        dashboard_page.wait_until_loaded()
+        return dashboard_page
 
     def is_login_error_displayed(self) -> bool:
         try:
