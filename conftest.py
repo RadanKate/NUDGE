@@ -22,19 +22,15 @@ def login(driver):
 def driver():
     if saucelabs_remote == "True":
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
-        desktop_browsers = {
-            "deviceName": "iPhone 11 Simulator",
-            "browserName": "Chrome",
-            "version": "latest",
-            "name": "NUDGE",
-            "deviceOrientation": "portrait",
-            "platformVersion": "13.2",
-            "platformName": "iOS",
-            "sauce:options": {
-                "extendedDebugging": True
-            }
+        desired_cap = {
+            "deviceName": "iPhone X Simulator",
+        "browserName": "Safari",
+        "deviceOrientation": "portrait",
+        "platformVersion": "12.2",
+        "platformName": "iOS"
+
         }
-        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desktop_browsers)
+        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
     else:
         driver = webdriver.Chrome()
     yield driver
