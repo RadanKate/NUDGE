@@ -23,10 +23,13 @@ def driver():
     if saucelabs_remote == "True":
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
         desktop_browsers = {
-            "platform": "iOS 13.2",
-            "browserName": "chrome",
+            "deviceName": "iPhone 11 Simulator",
+            "browserName": "Chrome",
             "version": "latest",
             "name": "NUDGE",
+            "deviceOrientation": "portrait",
+            "platformVersion": "13.2",
+            "platfromName": "iOS",
             "sauce:options": {
                 "extendedDebugging": True
             }
