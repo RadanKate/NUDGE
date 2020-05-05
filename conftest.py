@@ -24,10 +24,10 @@ def driver():
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
         desired_cap = {
             "deviceName": "iPhone X Simulator",
-        "browserName": "Safari",
-        "deviceOrientation": "portrait",
-        "platformVersion": "12.2",
-        "platformName": "iOS"
+            "browserName": "Chrome",
+            "deviceOrientation": "portrait",
+            "platformVersion": "12.2",
+            "platformName": "iOS"
 
         }
         driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
