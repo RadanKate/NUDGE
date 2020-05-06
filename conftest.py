@@ -22,10 +22,10 @@ def login(driver):
 def driver():
     if saucelabs_remote == "True":
         desired_cap = {
-            "deviceName": "iPhone XR free",
+            "deviceName": "iPhone XR",
             "browserName": "Safari",
             "deviceOrientation": "portrait",
-            "platformVersion": "13.3.1",
+            "platformVersion": "13.3",
             "platformName": "iOS"
         }
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
