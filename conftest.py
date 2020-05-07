@@ -51,7 +51,6 @@ ios_caps = [{
 def driver(request, data_center):
     caps = request.param
 
-    saucelabs_api_key = os.environ['TESTOBJECT_SAMPLE_IOS']
     caps['testobject_api_key'] = saucelabs_api_key
     test_name = request.node.name
     caps['name'] = test_name
