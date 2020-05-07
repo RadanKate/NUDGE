@@ -10,6 +10,7 @@ password = env("PASSWORD")
 saucelabs_remote = env("REMOTE")
 saucelabs_username = env("SAUCELABS_USER_NAME")
 saucelabs_password = env("SAUCELABS_PASSWORD")
+saucelabs_api_key = env("API_KEY")
 
 
 # login once before all the tests, using credentials from .env file
@@ -22,11 +23,12 @@ def login(driver):
 def driver():
     if saucelabs_remote == "True":
         desired_cap = {
-            "deviceName": "iPhone.*",
+            "deviceName": "iPhone XR",
             "browserName": "Safari",
             "deviceOrientation": "portrait",
-            "platformVersion": "13",
-            "platformName": "iOS"
+            "platformVersion": "13.3.1",
+            "platformName": "iOS",
+            "testobject_api_key": saucelabs_api_key
         }
         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
         driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
