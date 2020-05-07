@@ -48,7 +48,7 @@ ios_caps = [{
 
 
 @pytest.fixture(params=ios_caps)
-def ios_driver(request, data_center):
+def driver(request, data_center):
     caps = request.param
 
     saucelabs_api_key = os.environ['TESTOBJECT_SAMPLE_IOS']
