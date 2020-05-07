@@ -1,7 +1,8 @@
 import pytest
 from Pages.Login_page import LoginPage
 from envparse import env
-from selenium import webdriver
+# from selenium import webdriver
+from appium import webdriver
 
 env.read_envfile()
 tenant = env("TENANT")
@@ -26,9 +27,10 @@ def driver():
     if saucelabs_remote == "True":
         desired_cap = {
             "deviceName": "iPhone XR",
+            "deviceIds": "iPhone_XR_free",
             "browserName": "Safari",
             "deviceOrientation": "portrait",
-            "platformVersion": "13.3.1",
+            "platformVersion": "13.3",
             "platformName": "iOS",
             "testobject_api_key": 'D4567FC495EE4E4CA94E24589D75BC5C'
         }
