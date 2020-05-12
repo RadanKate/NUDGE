@@ -1,9 +1,7 @@
 import pytest
 from selenium.common.exceptions import WebDriverException
-
 from Pages.Login_page import LoginPage
 from envparse import env
-from selenium import webdriver as selenium_webdriver
 from appium import webdriver as appium_webdriver
 
 env.read_envfile()
@@ -70,43 +68,6 @@ def driver(request, data_center):
     yield driver
 
     driver.quit()
-
-
-######################################
-
-# testing with a simulator
-
-# @pytest.fixture
-# def driver():
-#     if saucelabs_remote == "True":
-#         desired_cap = {
-#             "deviceName": "iPhone X Simulator",
-#             "browserName": "Safari",
-#             "deviceOrientation": "portrait",
-#             "platformVersion": "12.2",
-#             "platformName": "iOS"
-#         }
-#         SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
-#         driver = selenium_webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desired_cap)
-#     else:
-#         desired_cap = {
-#             "browserName": "Chrome",
-#             "version": "*",
-#             "goog:chromeOptions": {
-#                 "mobileEmulation": {
-#                     "deviceMetrics": {
-#                         "width": 360,
-#                         "height": 640,
-#                         "pixelRatio": 3
-#                     },
-#                     "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4_1 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Chrome/80.0.3987.149 Mobile/14E5239e Safari/602.1"}
-#             }
-#         }
-#         driver = selenium_webdriver.Chrome(desired_capabilities=desired_cap)
-#     yield driver
-#     driver.quit()
-
-######################################
 
 
 @pytest.fixture
