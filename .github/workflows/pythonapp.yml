@@ -38,6 +38,7 @@ jobs:
         PASSWORD: ${{secrets.PASSWORD}}
         REMOTE: ${{secrets.REMOTE}}
         SAUCELABS_USER_NAME: ${{secrets.SAUCELABS_USER_NAME}}
-        SAUCELABS_PASSWORD: ${{secrets.SAUCELABS_PASSWORD}}      
+        SAUCELABS_PASSWORD: ${{secrets.SAUCELABS_PASSWORD}}
+        API_KEY: ${{secrets.API_KEY}}      
       run: |
         pytest
