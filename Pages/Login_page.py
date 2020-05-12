@@ -20,7 +20,7 @@ class LoginPage(BasePage):
 
     def login(self):
         self.visit()
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".loginEmail")))
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".loginEmail")))
         self.driver.find_element_by_css_selector(".loginEmail").send_keys(self.username)
         self.driver.find_element_by_css_selector(".loginPassword").send_keys(self.password)
         time.sleep(1)

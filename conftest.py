@@ -64,7 +64,6 @@ def driver(request, data_center):
         print("SauceOnDemandSessionID={} job-name={}\n".format(driver.session_id, test_name))
     else:
         raise WebDriverException("Never created!")
-
     yield driver
 
     driver.quit()
