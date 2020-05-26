@@ -25,10 +25,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Install Appium
-        run: |
-          npm install
+        run: npm install
       - name: Start the Appium Server
         run: ./node_modules/.bin/appium > appium.log &
+      - name: Connect to device
+        run: |
+          adb tcpip 5555
+          adb connect 192.168.2.11
       - name: Test with pytest
         env:
           TENANT: ${{secrets.TENANT}}
