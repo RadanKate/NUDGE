@@ -7,7 +7,7 @@ env.read_envfile()
 tenant = env("TENANT")
 username = env("USER_NAME")
 password = env("PASSWORD")
-device_ID = env("device_ID")
+device_ID = env("DEVICE_ID")
 
 
 # login once before all the tests, using credentials from .env file
