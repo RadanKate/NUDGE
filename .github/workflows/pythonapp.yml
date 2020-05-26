@@ -30,8 +30,8 @@ jobs:
         run: ./node_modules/.bin/appium > appium.log &
       - name: Connect to device
         run: |
-          adb tcpip 5555
-          adb connect 192.168.2.11
+          ./adb tcpip 5555
+          ./adb connect 192.168.2.11
       - name: Test with pytest
         env:
           TENANT: ${{secrets.TENANT}}
