@@ -23,11 +23,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Install Appium
       run: |
-        npm install -g appium
+        npm install
     - name: Start the Appium Server
       run: ./node_modules/.bin/appium
     - name: Poll for Appium Server to Start
