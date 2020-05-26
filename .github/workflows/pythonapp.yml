@@ -30,10 +30,7 @@ jobs:
     - name: Start the Appium Server
       run: ./node_modules/.bin/appium
     - name: Poll for Appium Server to Start
-      run: |
-        until $(curl --output /dev/null --silent --head --fail http://127.0.0.1:4723/wd/hub/sessions); do
-          sleep 5
-        done    
+      run: appium   
     - name: Test with pytest
       env:
         TENANT: ${{secrets.TENANT}} 
