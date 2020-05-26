@@ -30,13 +30,14 @@ jobs:
         run: ./node_modules/.bin/appium > appium.log &
       - name: Connect to device
         run: |
-          ./adb tcpip 5555
-          ./adb connect 192.168.2.11
+          brew cask install android-platform-tools
+          adb devices
+          adb tcpip 5555
+          adb connect 192.168.2.11
       - name: Test with pytest
         env:
           TENANT: ${{secrets.TENANT}}
           USER_NAME: ${{secrets.USER_NAME}}
           PASSWORD: ${{secrets.PASSWORD}}
           DEVICE_ID: ${{secrets.DEVICE_ID}}
-        run: |
-          pytest
+        run: pytest
