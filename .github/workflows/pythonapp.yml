@@ -34,10 +34,6 @@ jobs:
           TENANT: ${{secrets.TENANT}}
           USER_NAME: ${{secrets.USER_NAME}}
           PASSWORD: ${{secrets.PASSWORD}}
-          REMOTE: ${{secrets.REMOTE}}
-          SAUCELABS_USER_NAME: ${{secrets.SAUCELABS_USER_NAME}}
-          SAUCELABS_PASSWORD: ${{secrets.SAUCELABS_PASSWORD}}
-          API_KEY: ${{secrets.API_KEY}}
           DEVICE_ID: ${{secrets.DEVICE_ID}}
         run: |
           pytest
