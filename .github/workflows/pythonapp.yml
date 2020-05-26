@@ -28,7 +28,7 @@ jobs:
         run: |
           npm install
       - name: Start the Appium Server
-        run: ./node_modules/.bin/appium
+        run: ./node_modules/.bin/appium > appium.log &
       - name: Test with pytest
         env:
           TENANT: ${{secrets.TENANT}}
