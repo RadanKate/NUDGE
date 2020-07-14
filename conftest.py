@@ -16,29 +16,31 @@ def login(driver):
     return LoginPage(driver, tenant, username, password)
 
 
-android_caps = [{
-    'platformName': 'Android',
-    'deviceIds': device_ID,
-    "platformVersion": '9',
-    'deviceName': 'Galaxy_S8',
-    'browserName': 'chrome',
+ios_caps = [{
+    'platformName': 'iOS',
+    'platformVersion': '13.5.1',
+    'deviceName': 'iPad 7',
+    'udid': device_ID,
+    'browserName': 'safari',
+    'automationName': 'XCUITest',
     'deviceOrientation': 'portrait',
     'privateDevicesOnly': False,
     'phoneOnly': True,
     'acceptSslCerts': True,
     'appiumVersion': '1.17.0',
-    'additionalWebviewBundleIds': ['process-ChromeViewService'],
-    'chromeInitialUrl': tenant
+    'additionalWebviewBundleIds': ['process-SafariViewService'],
+    "xcodeOrgId": "AUCWMQ5DFY",
+    "xcodeSigningId": "iPhone Developer"
 }]
 
 
-@pytest.fixture(params=android_caps)
+@pytest.fixture(params=ios_caps)
 def driver(request):
     caps = request.param
     test_name = request.node.name
     caps['name'] = test_name
 
-    driver = appium_webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_capabilities=caps)
+    driver = appium_webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_capabilities=caps)
     yield driver
 
     driver.quit()
