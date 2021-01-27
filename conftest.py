@@ -1,15 +1,13 @@
 import pytest
 from Pages.Login_page import LoginPage
 from envparse import env
-from selenium import webdriver
+from appium import webdriver as appium_webdriver
 
 env.read_envfile()
 tenant = env("TENANT")
 username = env("USER_NAME")
 password = env("PASSWORD")
-saucelabs_remote = env("REMOTE")
-saucelabs_username = env("SAUCELABS_USER_NAME")
-saucelabs_password = env("SAUCELABS_PASSWORD")
+device_ID = env("DEVICE_ID")
 
 
 # login once before all the tests, using credentials from .env file
@@ -18,23 +16,33 @@ def login(driver):
     return LoginPage(driver, tenant, username, password)
 
 
-@pytest.fixture
-def driver():
-    if saucelabs_remote == "True":
-        SAUCELABS_URL = 'https://' + saucelabs_username + ':' + saucelabs_password + '@ondemand.saucelabs.com:443/wd/hub'
-        desktop_browsers = {
-            "platform": "iOS 13.2",
-            "browserName": "chrome",
-            "version": "latest",
-            "name": "NUDGE",
-            "sauce:options": {
-                "extendedDebugging": True
-            }
-        }
-        driver = webdriver.Remote(command_executor=SAUCELABS_URL, desired_capabilities=desktop_browsers)
-    else:
-        driver = webdriver.Chrome()
+ios_caps = [{
+    'platformName': 'iOS',
+    'platformVersion': '13.6.1',
+    'deviceName': 'iPad',
+    'udid': device_ID,
+    'browserName': 'safari',
+    'automationName': 'XCUITest',
+    'deviceOrientation': 'portrait',
+    'privateDevicesOnly': False,
+    'phoneOnly': True,
+    'acceptSslCerts': True,
+    'appiumVersion': '1.17.0',
+    'additionalWebviewBundleIds': ['process-SafariViewService'],
+    "xcodeOrgId": "AUCWMQ5DFY",
+    "xcodeSigningId": "iPhone Developer"
+}]
+
+
+@pytest.fixture(params=ios_caps)
+def driver(request):
+    caps = request.param
+    test_name = request.node.name
+    caps['name'] = test_name
+
+    driver = appium_webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_capabilities=caps)
     yield driver
+
     driver.quit()
 
 

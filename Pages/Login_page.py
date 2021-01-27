@@ -20,17 +20,19 @@ class LoginPage(BasePage):
 
     def login(self):
         self.visit()
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".loginEmail")))
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".loginEmail")))
         self.driver.find_element_by_css_selector(".loginEmail").send_keys(self.username)
         self.driver.find_element_by_css_selector(".loginPassword").send_keys(self.password)
         time.sleep(1)
         self.driver.find_element_by_css_selector("[type='submit']").click()
         time.sleep(1)
-        return DashboardPage(self.driver, self.tenant)
+        dashboard_page = DashboardPage(self.driver, self.tenant)
+        dashboard_page.wait_until_loaded()
+        return dashboard_page
 
     def is_login_error_displayed(self) -> bool:
         try:
-            popup_error: WebElement = self.is_element_displayed(".modal-dialog")
+            popup_error: WebElement = self.get_element(".modal-dialog")
             if not popup_error.is_displayed():
                 return False
             if not self.driver.find_element_by_css_selector(".modal-title").text == "Error":
