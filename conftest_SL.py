@@ -24,16 +24,15 @@ def pytest_addoption(parser):
     parser.addoption("--dc", action="store", default='us', help="Set Sauce Labs Data Center (US or EU)")
 
 
-# @pytest.fixture
-# def data_center(request):
-#     return request.config.getoption('--dc')
+@pytest.fixture
+def data_center(request):
+     return request.config.getoption('--dc')
 
 
 ios_caps = [{
     'platformName': 'Android',
-    #'deviceIds': 'Samsung_Galaxy_S9_free',
-    'deviceIds': '192.168.2.11:5555',
-   #"platformVersion": "9",
+    'deviceIds': 'Samsung_Galaxy_S9_free',
+    "platformVersion": '9',
     'deviceOrientation': 'portrait',
     'privateDevicesOnly': False,
     'phoneOnly': True,
@@ -45,19 +44,19 @@ ios_caps = [{
 
 
 @pytest.fixture(params=ios_caps)
-def driver(request):
+def driver(request, data_center):
     caps = request.param
 
     caps['testobject_api_key'] = saucelabs_api_key
     test_name = request.node.name
     caps['name'] = test_name
 
-    # if data_center and data_center.lower() == 'eu':
-    #     sauce_url = "https://appium.testobject.com/wd/hub"
-    # else:
-    #     sauce_url = "https://us1.appium.testobject.com/wd/hub"
+    if data_center and data_center.lower() == 'eu':
+        sauce_url = "https://appium.testobject.com/wd/hub"
+    else:
+        sauce_url = "https://us1.appium.testobject.com/wd/hub"
 
-    driver = appium_webdriver.Remote(desired_capabilities=caps)
+    driver = appium_webdriver.Remote(sauce_url, desired_capabilities=caps)
 
     # This is specifically for SauceLabs plugin.
     # In case test fails after selenium session creation having this here will help track it down.

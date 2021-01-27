@@ -18,8 +18,8 @@ def login(driver):
 
 ios_caps = [{
     'platformName': 'iOS',
-    'platformVersion': '13.5.1',
-    'deviceName': 'iPad 7',
+    'platformVersion': '13.6.1',
+    'deviceName': 'iPad',
     'udid': device_ID,
     'browserName': 'safari',
     'automationName': 'XCUITest',
